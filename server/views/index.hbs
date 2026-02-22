@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{> header}}
+    <title>Inici - Sakila</title>
+</head>
+<body>
+    {{> menu}}
+    <main class="container">
+        <h1>Benvingut a Sakila</h1>
+        <section>
+            <h2>Top 5 Pel·lícules</h2>
+            <div class="grid">
+                {{#each movies}}
+                <div class="card">
+                    <h3>{{this.title}}</h3>
+                    <p>Any: {{this.release_year}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        <section>
+            <h2>Categories</h2>
+            <ul>
+                {{#each categories}}
+                <li>{{this.name}}</li>
+                {{/each}}
+            </ul>
+        </section>
+    </main>
+    {{> footer}}
+</body>
+</html>
