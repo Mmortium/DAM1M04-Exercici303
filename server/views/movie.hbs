@@ -1,0 +1,14 @@
+{{> header}}
+{{> menu}}
+<main class="container">
+    <h1>Detalls de la Pel·lícula</h1>
+    <article>
+        <h2>{{movie.title}}</h2>
+        <p><strong>Any:</strong> {{movie.release_year}}</p>
+        <p><strong>Descripció:</strong> {{movie.description}}</p>
+        
+        <a href="/movieEdit?id={{movie.film_id}}">Anar a Edició / Esborrar</a> | 
+        <a href="/movies">Tornar a la llista</a>
+    </article>
+</main>
+{{> footer}}

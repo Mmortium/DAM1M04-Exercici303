@@ -1,0 +1,23 @@
+{{> header}}
+<h1>Editar: {{movie.title}}</h1>
+
+<form action="/editarPeli" method="POST">
+    <input type="hidden" name="film_id" value="{{movie.film_id}}">
+    
+    <label>Títol:</label>
+    <input type="text" name="title" value="{{movie.title}}">
+    
+    <label>Any:</label>
+    <input type="number" name="release_year" value="{{movie.release_year}}">
+    
+    <button type="submit">Guardar Canvis</button>
+</form>
+
+<hr>
+
+<form action="/esborrarPeli" method="POST" onsubmit="return confirm('Segur?')">
+    <input type="hidden" name="film_id" value="{{movie.film_id}}">
+    <button type="submit" style="background: red; color: white;">ESBORRAR PEL·LÍCULA</button>
+</form>
+
+{{> footer}}

@@ -1,0 +1,25 @@
+{{> header}}
+{{> menu}}
+<main class="container">
+    <h1>Afegir Nova Pel·lícula</h1>
+    <form action="/afegirPeli" method="POST">
+        <div>
+            <label>Títol:</label><br>
+            <input type="text" name="title" required>
+        </div>
+        <div>
+            <label>Descripció:</label><br>
+            <textarea name="description"></textarea>
+        </div>
+        <div>
+            <label>Any:</label><br>
+            <input type="number" name="release_year" value="2026">
+        </div>
+        <input type="hidden" name="language_id" value="1">
+        
+        <br>
+        <button type="submit">Crear Pel·lícula</button>
+        <a href="/movies">Cancel·lar</a>
+    </form>
+</main>
+{{> footer}}
