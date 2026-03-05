@@ -39,7 +39,9 @@ if (!isProxmox) {
 
 // Static files
 app.use(express.static(path.join(__dirname, '../public')));
-
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 // Disable cache
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
@@ -117,6 +119,28 @@ app.get('/movieEdit', async (req, res) => {
 app.get('/movieAdd', (req, res) => {
     const commonData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8'));
     res.render('movieAdd', { common: commonData });
+});
+
+app.get('/customers', async (req, res) => {
+  try {
+    const rows = await db.query(`
+      SELECT c.first_name, c.last_name, 
+      (SELECT GROUP_CONCAT(f.title SEPARATOR ', ') 
+       FROM rental r 
+       JOIN inventory i ON r.inventory_id = i.inventory_id 
+       JOIN film f ON i.film_id = f.film_id 
+       WHERE r.customer_id = c.customer_id 
+       ORDER BY r.rental_date DESC LIMIT 3) AS rentals
+      FROM customer c 
+      LIMIT 25
+    `);
+    const customersJson = db.table_to_json(rows, { first_name: 'string', last_name: 'string', rentals: 'string' });
+    const commonData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'common.json'), 'utf8'));
+    res.render('customers', { customers: customersJson, common: commonData });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error en customers');
+  }
 });
 
 // --- RUTES POST ---

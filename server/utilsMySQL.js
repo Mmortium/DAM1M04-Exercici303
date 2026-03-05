@@ -4,6 +4,7 @@ class Obj {
 
     // Inicia la connexió amb la base de dades
     init (parameters) {
+        this.db = parameters.database;
         this.pool  = mysql.createPool({
             connectionLimit : 10,
             host        : parameters.host,

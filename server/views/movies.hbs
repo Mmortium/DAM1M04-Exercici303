@@ -1,41 +1,33 @@
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-    {{> header}}
-    <title>Pel·lícules - Sakila</title>
-</head>
-<body>
-    {{> menu}}
+{{> header}}
+{{> menu}}
     
-    <main class="container">
-        <section class="header-movies">
-            <h1>Llista de Pel·lícules (Top 15)</h1>
-            <a href="/movieAdd" class="btn-add">Afegir Nova Pel·lícula</a>
-        </section>
+<main class="container">
+    <section class="header-movies">
+        <h1>Llista de Pel·lícules (Top 15)</h1>
+        <a href="/movieAdd" class="btn-add">Afegir Nova Pel·lícula</a>
+    </section>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Títol</th>
-                    <th>Any</th>
-                    <th>Actors</th>
-                    <th>Accions</th> </tr>
-            </thead>
-            <tbody>
-                {{#each movies}}
-                <tr>
-                    <td><strong>{{this.title}}</strong></td>
-                    <td>{{this.release_year}}</td>
-                    <td>{{this.actors}}</td>
-                    <td>
-                        <a href="/movie?id={{this.film_id}}" class="btn-detalls">Veure Detalls</a>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </main>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Títol</th>
+                <th>Any</th>
+                <th>Actors</th>
+                <th>Accions</th> </tr>
+        </thead>
+        <tbody>
+            {{#each movies}}
+            <tr>
+                <td><strong>{{this.title}}</strong></td>
+                <td>{{this.release_year}}</td>
+                <td>{{this.actors}}</td>
+                <td>
+                    <a href="/movie?id={{this.film_id}}" class="btn-detalls">Veure Detalls</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</main>
 
-    {{> footer}}
-</body>
-</html>
+{{> footer}}
